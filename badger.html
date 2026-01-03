@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$BADGER | BADGER BADGER BADGER BADGER MUSHROOM MUSHROOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --badger-black: #0a0a0a;
+            --badger-white: #fafafa;
+            --mushroom-red: #ff0040;
+            --snake-green: #00ff88;
+            --honey-yellow: #ffdd00;
+        }
+
+        body {
+            background: var(--badger-black);
+            color: var(--badger-white);
+            font-family: 'VT323', monospace;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%23ffdd00"/></svg>'), auto;
+        }
+
+        /* Animated background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,221,0,0.03) 2px, rgba(255,221,0,0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,221,0,0.03) 2px, rgba(255,221,0,0.03) 4px);
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            animation: glitch 3s infinite;
+        }
+
+        h1 {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            color: var(--honey-yellow);
+            text-shadow: 
+                3px 3px 0 var(--mushroom-red),
+                6px 6px 0 var(--snake-green),
+                9px 9px 20px rgba(255,221,0,0.5);
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
+
+        /* Spam text */
+        .spam {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--badger-white);
+            text-align: center;
+            margin: 2rem 0;
+            line-height: 1.2;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .spam-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .spam-content {
+            display: inline-block;
+            padding-right: 100%;
+        }
+
+        /* Video section */
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+            border: 8px solid var(--honey-yellow);
+            box-shadow: 
+                0 0 20px var(--honey-yellow),
+                inset 0 0 20px rgba(255,221,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+        }
+
+        /* Buy button */
+        .buy-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .buy-button {
+            display: inline-block;
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            padding: 2rem 4rem;
+            background: linear-gradient(45deg, var(--mushroom-red), var(--honey-yellow), var(--snake-green));
+            background-size: 300% 300%;
+            color: var(--badger-black);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: gradient 3s ease infinite, shake 0.5s infinite;
+            box-shadow: 
+                0 10px 40px rgba(255,221,0,0.6),
+                inset 0 0 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .buy-button:hover {
+            transform: scale(1.1) rotate(0deg);
+            animation: gradient 1s ease infinite, megashake 0.1s infinite;
+        }
+
+        @keyframes megashake {
+            0%, 100% { transform: scale(1.1) translate(-2px, -2px); }
+            25% { transform: scale(1.1) translate(2px, -2px); }
+            50% { transform: scale(1.1) translate(2px, 2px); }
+            75% { transform: scale(1.1) translate(-2px, 2px); }
+        }
+
+        .buy-button::before {
+            content: '🦡';
+            position: absolute;
+            font-size: 3rem;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat {
+            background: rgba(255,221,0,0.1);
+            border: 3px solid var(--honey-yellow);
+            padding: 2rem;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--honey-yellow); }
+            100% { box-shadow: 0 0 20px var(--honey-yellow); }
+        }
+
+        .stat-value {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 3rem;
+            color: var(--mushroom-red);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.5rem;
+            color: var(--badger-white);
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            font-size: 1.2rem;
+            color: var(--snake-green);
+        }
+
+        .disclaimer {
+            max-width: 600px;
+            margin: 2rem auto;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+        }
+
+        /* Mushroom events */
+        .mushroom {
+            position: fixed;
+            font-size: 3rem;
+            animation: mushroom-fall 5s linear;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes mushroom-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .buy-button {
+                padding: 1.5rem 2rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header>
+            <h1>$BADGER</h1>
+        </header>
+
+        <div class="spam-wrapper">
+            <div class="spam spam-content">
+                BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER MUSHROOM MUSHROOM 🍄 BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER MUSHROOM MUSHROOM 🍄 
+            </div>
+        </div>
+
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/EIyixC9NsLI?autoplay=1&loop=1&playlist=EIyixC9NsLI&mute=0&controls=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="buy-section">
+            <a href="#" class="buy-button" onclick="alert('BADGER BADGER BADGER! Contract: Coming Soon™'); return false;">
+                BUY $BADGER
+            </a>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-value">12</span>
+                <span class="stat-label">Badgers Per Mushroom</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">♾️</span>
+                <span class="stat-label">Total Supply</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">2003</span>
+                <span class="stat-label">Meme Vintage</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">🐍</span>
+                <span class="stat-label">Snake Events</span>
+            </div>
+        </div>
+
+        <footer>
+            <p style="font-size: 2rem; margin-bottom: 1rem;">BADGER BADGER BADGER BADGER</p>
+            <p style="font-size: 1.5rem; color: var(--mushroom-red);">MUSHROOM MUSHROOM</p>
+            <p style="font-size: 2rem; margin-top: 1rem; color: var(--snake-green);">SNAAAAAAAAKE!</p>
+            
+            <div class="disclaimer">
+                This is a meme. Not financial advice. We're just badgering. 
+                Probably nothing. DYOR. Don't be a snake. 
+                Remember: It's always mushroom time somewhere.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Random mushroom rain
+        function spawnMushroom() {
+            const mushroom = document.createElement('div');
+            mushroom.className = 'mushroom';
+            mushroom.textContent = '🍄';
+            mushroom.style.left = Math.random() * 100 + 'vw';
+            mushroom.style.top = '-100px';
+            document.body.appendChild(mushroom);
+            
+            setTimeout(() => mushroom.remove(), 5000);
+        }
+
+        // Spawn mushrooms randomly
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                spawnMushroom();
+            }
+        }, 2000);
+
+        // Easter egg: Type "snake" to trigger chaos
+        let typed = '';
+        document.addEventListener('keypress', (e) => {
+            typed += e.key;
+            if (typed.includes('snake')) {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(spawnMushroom, i * 100);
+                }
+                typed = '';
+            }
+            if (typed.length > 10) typed = typed.slice(-10);
+        });
+
+        // Console easter egg
+        console.log('%c BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER BADGER', 'font-size: 20px; color: #ffdd00; font-weight: bold;');
+        console.log('%c MUSHROOM MUSHROOM', 'font-size: 30px; color: #ff0040; font-weight: bold;');
+        console.log('%c SNAAAAAAAAKE!', 'font-size: 25px; color: #00ff88; font-weight: bold;');
+    </script>
+</body>
+</html>
